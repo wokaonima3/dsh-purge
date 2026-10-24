@@ -2,19 +2,32 @@
 
 ## 中文
 
-**这不是本仓库作者的原创项目，而是一份为防丢失而做的源码存档。**
+**这不是本仓库作者的原创项目，而是一份源码存档 + 本地派生构建。**
 
 | 项 | 内容 |
 |---|---|
 | 项目名 | `dsh-purge` — DeepSeek Harness 网络安全红队工具 / 破甲插件 |
-| 版本 | **1.1.71** |
-| 原作者 | **小杨**（`@YuJunZhiXue`），见 `LICENSE`：`Copyright (c) 2026 小杨` |
+| 版本 | **1.1.78**（本地构建号；上游为 **1.1.77**，本仓 = 上游 + 0.2.1 覆盖层，见 `LOCAL-OVERLAY.md`） |
+| 原作者 | **小杨**（`@YuJunZhiXue`），见 `LICENSE`：`Copyright 2026 YuJunZhiXue` |
 | 原仓库 | https://github.com/YuJunZhiXue/dsh-purge |
-| 原仓库状态 | **已不可访问**（GitHub 返回 `Could not resolve to a Repository`，作者已删除或转为私有） |
-| 许可 | MIT（`LICENSE`，原文完整保留，未作任何修改） |
-| 存档来源 | 本机已安装的插件目录 `C:\Users\23090\.dsh\plugins\dsh-purge`（v1.1.71，即上游最后一次发布版本） |
-| 存档时间 | 2026-10-21 |
-| 存档范围 | 该目录下全部 106 个文件，3.31 MB（`lib/`、`bin/`、`presets/`、`skills/`、`scripts/`、`docs/`、`client.js`、`cordis.patch.yml`、README、release-notes、LICENSE 等） |
+| 原仓库状态 | **已恢复可访问**（此前一度 `Could not resolve to a Repository`），`master` 当前为 **1.1.77** |
+| 许可 | **Apache-2.0**（上游自 1.1.7x 起由 MIT 改为此许可，已附带 `NOTICE` 与 `LICENSE-COMMERCIAL.md`；本仓原样保留） |
+| 存档来源 | 早期版本取自本机已安装的插件目录（v1.1.71）；当前版本取自上游 `master` 的 codeload 压缩包（v1.1.77），再叠加本地覆盖层 |
+| 更新日期 | 2026-10-24 |
+| 存档范围 | 99 个文件（`lib/`、`bin/`、`presets/`、`scripts/`、`docs/`、`client.js`、`cordis.patch.yml`、README、release-notes、LICENSE、NOTICE 等） |
+
+### 本仓做了哪些改动（Apache-2.0 §4(b) 要求声明）
+
+相对上游 `master`（v1.1.77），本仓只多出以下内容，全部记录在案：
+
+1. `lib/core.js` —— 追加 DSH 0.2.1 的 5 处补丁锚点（`harness-dev-context` 目标、#32 / #53 / #68 / #77）；
+2. `package.json` —— 版本号 1.1.77 → **1.1.78**，`dshTarget` 指向 `0.2.1-rc.3`；
+3. `LOCAL-OVERLAY.md` —— 上述增量的说明与回滚方式；
+4. `ARCHIVE-NOTICE.md` —— 本文件；
+5. 两个 README 顶部的一行存档横幅；
+6. `.gitignore` —— 恢复 `*.pre-fix-*` 规则，防止补丁前备份文件再次进仓。
+
+**没有删除、没有改写上游的任何源码或文档。** 上游在 1.1.71 → 1.1.77 之间自行移除了 `skills/redteam/*.md`（23 个技能文件），因此当前树中不含这些文件；它们仍可从本仓历史提交 `b483e1e` 完整取回。
 
 ### 署名
 
@@ -25,13 +38,14 @@
 本仓库照此执行：
 
 - 全部源码、文档、提示词、技能文件**版权归原作者 小杨（YuJunZhiXue）所有**。
-- 本仓库**未修改任何源代码**，仅新增本说明文件，并在两个 README 顶部加了一行指向本说明的存档横幅。
 - 本仓库**不主张任何著作权**，也不以任何形式商业售卖。
+- `NOTICE` 与 `LICENSE` 原样保留，未作任何修改。
+- 本仓库**不是官方发布**，构建号 1.1.78 仅在本仓存在；请勿据此判断上游发版。
 - 如原作者要求下架，删除即可，无需理由。
 
 ### 为什么会有这个仓库
 
-上游仓库被删除后，这份代码在公网上已无任何可获取的副本。存档目的仅为**保留可复现的技术资料**（含 `release-notes.md` 里 1.1.x 全量变更记录），供原作者或后来者查阅，不构成对原作者任何权利的侵犯或主张。
+最初是为了在上游仓库不可访问时，保留一份可复现的技术资料（含 `release-notes.md` 里 1.1.x 全量变更记录）。上游恢复后，本仓转为「镜像 + 最小兼容覆盖层」，便于在本机 DSH 0.2.1 上复现验证，不构成对原作者任何权利的侵犯或主张。
 
 ### 免责
 
@@ -41,32 +55,46 @@
 
 ## English
 
-**This is not the original work of this repository's owner — it is a preservation copy of source code that disappeared upstream.**
+**This is not the original work of this repository's owner — it is a source archive plus a small local derivative build.**
 
 | Field | Value |
 |---|---|
 | Project | `dsh-purge` — DeepSeek Harness cybersecurity red-team / prompt-patch plugin |
-| Version | **1.1.71** |
-| Original author | **小杨 (Xiao Yang)**, GitHub `@YuJunZhiXue` — see `LICENSE`: `Copyright (c) 2026 小杨` |
+| Version | **1.1.78** (local build number; upstream is **1.1.77**; this repo = upstream + 0.2.1 overlay, see `LOCAL-OVERLAY.md`) |
+| Original author | **小杨 (Xiao Yang)**, GitHub `@YuJunZhiXue` — see `LICENSE`: `Copyright 2026 YuJunZhiXue` |
 | Upstream | https://github.com/YuJunZhiXue/dsh-purge |
-| Upstream status | **Gone** — GitHub returns `Could not resolve to a Repository`; deleted or made private by the author |
-| License | MIT — `LICENSE` kept byte-for-byte, unmodified |
-| Source of this copy | The locally installed plugin at `C:\Users\23090\.dsh\plugins\dsh-purge` (v1.1.71, the last published upstream release) |
-| Archived on | 2026-10-21 |
-| Scope | All 106 files, 3.31 MB: `lib/`, `bin/`, `presets/`, `skills/`, `scripts/`, `docs/`, `client.js`, `cordis.patch.yml`, READMEs, `release-notes.md`, `LICENSE` |
+| Upstream status | **Available again** (it was briefly unreachable); `master` is currently **1.1.77** |
+| License | **Apache-2.0** (upstream relicensed from MIT and now ships `NOTICE` + `LICENSE-COMMERCIAL.md`, both kept as-is here) |
+| Source of this copy | Earlier version from the locally installed plugin (v1.1.71); current version from the upstream `master` codeload archive (v1.1.77) with the local overlay applied |
+| Updated on | 2026-10-24 |
+| Scope | 99 files: `lib/`, `bin/`, `presets/`, `scripts/`, `docs/`, `client.js`, `cordis.patch.yml`, READMEs, `release-notes.md`, `LICENSE`, `NOTICE` |
+
+### What this repository changed (Apache-2.0 §4(b) disclosure)
+
+Relative to upstream `master` (v1.1.77), the only additions are:
+
+1. `lib/core.js` — five DSH 0.2.1 patch anchors (`harness-dev-context` target; #32 / #53 / #68 / #77);
+2. `package.json` — version 1.1.77 → **1.1.78**, `dshTarget` set to `0.2.1-rc.3`;
+3. `LOCAL-OVERLAY.md` — explanation and rollback for the above;
+4. `ARCHIVE-NOTICE.md` — this file;
+5. a one-line archive banner at the top of both READMEs;
+6. `.gitignore` — restores the `*.pre-fix-*` rule so pre-patch backups cannot be committed again.
+
+**No upstream source or document was deleted or rewritten.** Upstream itself dropped `skills/redteam/*.md` (23 skill files) between 1.1.71 and 1.1.77, so they are absent from the current tree; they remain recoverable from this repo's history at commit `b483e1e`.
 
 ### Attribution
 
 The original `README.zh-CN.md` requires attribution and a link to the source repository for anyone reusing the name, ideas, code, or prompts. This archive complies:
 
 - All source code, docs, prompts and skill files remain **copyright © 小杨 (YuJunZhiXue)**.
-- **No source file was modified.** The only additions are this notice and a one-line archive banner at the top of both READMEs.
+- `NOTICE` and `LICENSE` are kept byte-for-byte, unmodified.
 - No copyright is claimed here, and nothing is sold.
+- **This is not an official release**; build number 1.1.78 exists only in this repository — do not read it as an upstream release.
 - The author may request removal at any time; it will be deleted without argument.
 
 ### Why this exists
 
-With the upstream repository deleted, no public copy of this code remained. The sole purpose is to preserve reproducible technical material — including the complete 1.1.x changelog in `release-notes.md` — for the original author and for anyone studying the implementation.
+It began as a preservation copy while the upstream repository was unreachable. Now that upstream is back, this repository serves as a mirror plus the smallest possible compatibility overlay, so DSH 0.2.1 behaviour can be reproduced and verified locally.
 
 ### Disclaimer
 
